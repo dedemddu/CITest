@@ -1,0 +1,32 @@
+name: Quality Checks
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  quality-checks:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: npm install eslint html-validator css-validator axe-core puppeteer --save-dev
+    
+    - name: Run ESLint
+      run: npx eslint listadoUser/app.js listadoUser/utils.js
+    
+    - name: Validar HTML
+      run: |
+        npx html-validator --file=listadoUser/index.html --verbose
+    
+    - name: Validar CSS
+      run: |
+        npx css-validator listadoUser/styles.css    
+   
