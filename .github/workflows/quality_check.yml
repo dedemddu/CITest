@@ -1,9 +1,9 @@
 name: Quality Checks
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   quality-checks:
@@ -20,7 +20,7 @@ jobs:
       run: npm install eslint html-validator css-validator axe-core puppeteer --save-dev
     
     - name: Run ESLint
-      run: npx eslint listadoUser/app.js listadoUser/utils.js
+      run: npx eslint listadoUser/scripts/app.js listadoUser/scripts/service.js
     
     - name: Validar HTML
       run: |
@@ -28,5 +28,5 @@ jobs:
     
     - name: Validar CSS
       run: |
-        npx css-validator listadoUser/styles.css    
+        npx css-validator listadoUser/css/app.css    
    
